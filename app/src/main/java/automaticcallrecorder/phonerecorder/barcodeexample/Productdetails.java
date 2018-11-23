@@ -18,13 +18,9 @@ public class Productdetails extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        overridePendingTransition(R.anim.slideoutdown, R.anim.slideinup);
+        overridePendingTransition(R.anim.uptocenter, R.anim.centertodown);
     }
-    protected void onPause()
-    {
-        super.onPause();
-        overridePendingTransition(R.anim.skidindown, R.anim.slideoutup);
-    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){

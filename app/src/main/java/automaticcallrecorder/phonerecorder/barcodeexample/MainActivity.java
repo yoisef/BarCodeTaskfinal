@@ -242,7 +242,21 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
 
         }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+
+        overridePendingTransition(R.anim.downtocenter, R.anim.centertoup);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(R.anim.uptocenter, R.anim.centertodown);
+
+    }
 
 
     private void requestPermission() {

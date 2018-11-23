@@ -53,11 +53,14 @@ public class Camera_activity extends AppCompatActivity {
     Button cancel;
     FrameLayout myframe;
     MediaPlayer ring;
+    android.hardware.Camera c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_activity);
+
+
 
          ring= MediaPlayer.create(Camera_activity.this,R.raw.notif);
 
@@ -65,7 +68,11 @@ public class Camera_activity extends AppCompatActivity {
         cameraView = (SurfaceView) findViewById(R.id.camera_view);
         cancel = (Button) findViewById(R.id.backtomain);
         myframe= (FrameLayout) findViewById(R.id.myframecamera);
-       // cameraView.setZOrderOnTop(true);
+
+        //set camera to continually auto-focus
+
+        
+
         cameraView.getHolder().setFormat(PixelFormat.TRANSLUCENT);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
