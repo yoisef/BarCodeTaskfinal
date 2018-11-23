@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".Productdetails">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@color/lbne"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:src="@drawable/lipton"
+            android:layout_gravity="center"
+           android:layout_marginTop="10dp"
+            android:layout_height="70dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="be more tea"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textSize="15sp"
+            android:layout_marginBottom="33dp"
+            android:textColor="@color/blood"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Lipton Tea"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="15sp"
+            android:layout_gravity="center"
+            android:gravity="left"
+            android:layout_margin="5dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="@string/description"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="70dp"
+        android:padding="13dp"
+        android:elevation="8dp"
+
+        android:background="@drawable/circlestar"
+        android:src="@drawable/star"
+        android:layout_margin="6dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_height="70dp" />
+</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="20dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginLeft="40dp"
+            android:textSize="20sp"
+            android:id="@+id/a"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/lbne"
+            android:text="BOX INFO"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="18sp"
+            android:layout_toRightOf="@id/a"
+            android:layout_below="@id/a"
+            android:id="@+id/a1"
+            android:text="Size"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="18sp"
+            android:layout_toRightOf="@id/a"
+            android:layout_below="@id/a1"
+            android:text="TotalBags"
+            android:id="@+id/a2"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginRight="10dp"
+            android:text="2 x10x3"
+            android:layout_below="@id/a"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="18sp"
+            android:text="25"
+
+            android:layout_below="@id/a1"
+            android:layout_marginRight="55dp"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_height="wrap_content" />
+
+
+
+    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="20dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginLeft="40dp"
+                android:textSize="20sp"
+                android:id="@+id/c"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/lbne"
+                android:text="CONTAINS"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_toRightOf="@id/c"
+                android:layout_below="@id/c"
+                android:id="@+id/c1"
+                android:text="Caffiene"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginRight="10dp"
+                android:text="55mg per fl. oz cup"
+                android:layout_below="@id/c"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_height="wrap_content" />
+
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="20dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginLeft="40dp"
+                android:textSize="20sp"
+                android:id="@+id/d"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/lbne"
+                android:text="ENERGY"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_toRightOf="@id/d"
+                android:layout_below="@id/d"
+                android:id="@+id/d1"
+                android:text="Per 500 ml"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_toRightOf="@id/d"
+                android:layout_below="@id/d1"
+                android:text="Less Than 0.1 g"
+                android:id="@+id/d2"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginRight="10dp"
+                android:text="Less Than 0.1 g"
+                android:layout_below="@id/d"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:text="Per 100 ml"
+                android:layout_below="@id/d1"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_height="wrap_content" />
+
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="20dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginLeft="40dp"
+                android:textSize="20sp"
+                android:id="@+id/b"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/lbne"
+                android:text="PROTEIN"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_toRightOf="@id/b"
+                android:layout_below="@id/b"
+                android:id="@+id/b1"
+                android:text="Size"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_toRightOf="@id/b"
+                android:layout_below="@id/b1"
+                android:text="TotalBags"
+                android:id="@+id/b2"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginRight="10dp"
+                android:text="TotalBags"
+                android:layout_below="@id/b"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:text="TotalBags"
+                android:layout_below="@id/b1"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_height="wrap_content" />
+
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="20dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginLeft="40dp"
+                android:textSize="20sp"
+                android:id="@+id/b"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/lbne"
+                android:text="FAT"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_toRightOf="@id/b"
+                android:layout_below="@id/b"
+                android:id="@+id/b1"
+                android:text="Size"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_toRightOf="@id/b"
+                android:layout_below="@id/b1"
+                android:text="TotalBags"
+                android:id="@+id/b2"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginRight="10dp"
+                android:text="TotalBags"
+                android:layout_below="@id/b"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:text="TotalBags"
+                android:layout_below="@id/b1"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_height="wrap_content" />
+
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="20dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginLeft="40dp"
+                android:textSize="20sp"
+                android:id="@+id/b"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/lbne"
+                android:text="CARBOHYDRATE"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_toRightOf="@id/b"
+                android:layout_below="@id/b"
+                android:id="@+id/b1"
+                android:text="Size"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_toRightOf="@id/b"
+                android:layout_below="@id/b1"
+                android:text="TotalBags"
+                android:id="@+id/b2"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginRight="10dp"
+                android:text="TotalBags"
+                android:layout_below="@id/b"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:text="TotalBags"
+                android:layout_below="@id/b1"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_height="wrap_content" />
+
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="20dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginLeft="40dp"
+                android:textSize="20sp"
+                android:id="@+id/b"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/lbne"
+                android:text="SODIUM"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_toRightOf="@id/b"
+                android:layout_below="@id/b"
+                android:id="@+id/b1"
+                android:text="Size"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_toRightOf="@id/b"
+                android:layout_below="@id/b1"
+                android:text="TotalBags"
+                android:id="@+id/b2"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginRight="10dp"
+                android:text="TotalBags"
+                android:layout_below="@id/b"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:text="TotalBags"
+                android:layout_below="@id/b1"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_height="wrap_content" />
+
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="20dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginLeft="40dp"
+                android:textSize="20sp"
+                android:id="@+id/b"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/lbne"
+                android:text="TEA FIAVONIDS"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_toRightOf="@id/b"
+                android:layout_below="@id/b"
+                android:id="@+id/b1"
+                android:text="Size"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_toRightOf="@id/b"
+                android:layout_below="@id/b1"
+                android:text="TotalBags"
+                android:id="@+id/b2"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginRight="10dp"
+                android:text="TotalBags"
+                android:layout_below="@id/b"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:text="TotalBags"
+                android:layout_below="@id/b1"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_height="wrap_content" />
+
+
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

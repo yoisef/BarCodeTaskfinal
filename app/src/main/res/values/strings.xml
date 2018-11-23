@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">BarcodeTask</string>
+    <string name="but1">Enter BarCode</string>
+    <string name="description">Unlock the energy with Lipton Natural Energy Premium Black Tea Bags, a great tasting aromatic tea that naturally has caffeine to keep you alert and energized throughout your day. To unleash the true tea taste and aroma, Lipton has crafted an innovative process to press fresh, high-quality tea leaves to release their natural essence.
+        The result is a delicious blend with natural theanine.
+        75mg caffeine/20mg theanine per 8 fl. oz. serving</string>
+    <string name="name">Lipton</string>
+    <string name="number">869896587</string>
+</resources>

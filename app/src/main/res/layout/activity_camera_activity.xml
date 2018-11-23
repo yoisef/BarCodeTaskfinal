@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/myframecamera"
+    android:layout_height="match_parent"
+    tools:context=".Camera_activity">
+    <SurfaceView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/camerashape"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/camera_view"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:textColor="@color/white"
+            android:text="place a barcode inside the viewfinder recyangle to scan it "
+            android:id="@+id/resultmyscan"
+            android:textSize="18sp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:text="Cancel"
+            android:id="@+id/backtomain"
+            android:textColor="@color/black"
+            android:background="@color/darkgray"
+            android:layout_gravity="bottom|center"
+            android:layout_margin="5dp"
+            android:textSize="15sp"
+            android:alpha=".5"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginLeft="110dp"
+        android:layout_marginRight="110dp"
+        android:background="@drawable/redline"
+        android:layout_height="3dp" />
+
+
+</FrameLayout>
