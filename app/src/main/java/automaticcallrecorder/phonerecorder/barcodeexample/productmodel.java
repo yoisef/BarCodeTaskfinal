@@ -2,12 +2,12 @@ package automaticcallrecorder.phonerecorder.barcodeexample;
 
 public class productmodel {
 
-    String namemyproduct;
-    String numbermyproduct;
-    String descriptionmyproduct;
-    String imgmyproduct;
-    String colormyproduct;
-    String categorymyproduct;
+  public   String namemyproduct;
+   public String numbermyproduct;
+   public String descriptionmyproduct;
+   public String imgmyproduct;
+  public   String colormyproduct;
+  public   String categorymyproduct;
 
     public productmodel()
     {

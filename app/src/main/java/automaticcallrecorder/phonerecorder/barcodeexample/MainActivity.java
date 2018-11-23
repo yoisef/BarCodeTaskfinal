@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
         dbList = new ArrayList<>();
 
         requestPermission();
-        
+
 
         // Write a message to the database
         database = FirebaseDatabase.getInstance();
