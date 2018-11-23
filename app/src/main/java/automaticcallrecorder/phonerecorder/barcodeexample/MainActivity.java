@@ -3,6 +3,7 @@ package automaticcallrecorder.phonerecorder.barcodeexample;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -11,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Build;
 import android.provider.ContactsContract;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityCompat;
@@ -83,7 +85,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
     Button enterbarcode;
     android.app.AlertDialog.Builder builder;
     android.app.AlertDialog alertDialog;
-    productsdatabase mydatabase;
     Call<Rootmodel> mcall;
     Recycleadapter mAdapter;
     List<Product> dbList;
@@ -98,16 +99,15 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
         setContentView(R.layout.activity_main);
         dbList = new ArrayList<>();
 
-
-
+        requestPermission();
+        
 
         // Write a message to the database
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("products");
 
 
-        mydatabase = new productsdatabase(this);
-        dbList = mydatabase.getdataforproduct();
+
         mAdapter = new Recycleadapter(this);
 
 
@@ -236,48 +236,63 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
 
         cameraView = (SurfaceView) findViewById(R.id.camera_view);
 
-        /*
-        if (this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-            // this device has a camera
-            Toast.makeText(this, "The device has A Camera", Toast.LENGTH_LONG).show();
-        } else {
-            // no camera on this device
-            Toast.makeText(this, "The device Not has A Camera", Toast.LENGTH_LONG).show();
+
+
 
 
         }
-        */
-
-        // Here, thisActivity is the current activity
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Permission is not granted
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.CAMERA)) {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.CAMERA},
-                        1);
 
 
-            } else {
-                // No explanation needed; request the permission
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.CAMERA},
-                        1);
 
 
-            }
+    private void requestPermission() {
+
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.CAMERA},
+                1);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getApplicationContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
+
+                    // main logic
+                } else {
+                    Toast.makeText(getApplicationContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                                != PackageManager.PERMISSION_GRANTED) {
+                            showMessageOKCancel("You need to allow access permissions",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                requestPermission();
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                }
+                break;
         }
+    }
 
-
-
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(MainActivity.this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
     }
 
 
-    @Override
+
+        @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Call<Rootmodel> mycall;
 
@@ -372,7 +387,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
 
-        List<Product> proexample = mydatabase.getdataforproduct();
 
         if (viewHolder instanceof Recycleadapter.viewholder) {
             // get the removed item name to display it in snack bar

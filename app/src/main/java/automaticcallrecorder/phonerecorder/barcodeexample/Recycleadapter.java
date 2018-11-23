@@ -22,16 +22,16 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 
 
 
 public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewholder> {
 
     Context con;
-    productsdatabase database;
+
     List<productmodel> mylist;
     DatabaseReference reference= FirebaseDatabase.getInstance().getReference("products");
     List<String> keys;
@@ -43,7 +43,6 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
     {
         this.con=context;
         mylist=new ArrayList<>();
-        database=new productsdatabase(context);
         keys=new ArrayList<>();
 
         notifyDataSetChanged();
@@ -79,9 +78,6 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
             }
         });
 
-    }
-    public List<String> getKeys() {
-        return keys;
     }
 
 
@@ -173,6 +169,10 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
         mylist.remove(position);
         notifyItemRemoved(position);
     }
+    public List<String> getKeys() {
+        return keys;
+    }
+
 
 
 }
