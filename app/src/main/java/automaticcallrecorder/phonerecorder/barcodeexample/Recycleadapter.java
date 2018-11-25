@@ -4,6 +4,7 @@ package automaticcallrecorder.phonerecorder.barcodeexample;
 import android.content.Context;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.agilie.swipe2delete.SwipeToDeleteDelegate;
+import com.agilie.swipe2delete.interfaces.ISwipeToDeleteAdapter;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -39,11 +42,20 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
 
 
 
+    ArrayList<Integer> prices;
+
+
+
+
     public Recycleadapter(Context context)
     {
         this.con=context;
         mylist=new ArrayList<>();
         keys=new ArrayList<>();
+        prices=new ArrayList<>();
+
+
+
 
         notifyDataSetChanged();
 
@@ -91,6 +103,7 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
 
     @Override
     public void onBindViewHolder(@NonNull final viewholder holder,  int position) {
+
 
 
         holder.rowrecycle.setOnClickListener(new View.OnClickListener() {
@@ -142,6 +155,8 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
         return mylist.size();
     }
 
+
+
     class viewholder extends RecyclerView.ViewHolder{
 
         TextView namee , numberr , pricee ,deleterowww;
@@ -162,6 +177,13 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
             deleterowww=itemView.findViewById(R.id.deleterow);
 
         }
+    }
+
+
+
+
+    public ArrayList<Integer> getPrices() {
+        return prices;
     }
 
 

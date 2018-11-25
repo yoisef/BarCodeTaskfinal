@@ -6,4 +6,5 @@
         75mg caffeine/20mg theanine per 8 fl. oz. serving</string>
     <string name="name">Lipton</string>
     <string name="number">869896587</string>
+    <string name="alertpay">please wait for the Merchant Terminal for verifying the Cart items</string>
 </resources>

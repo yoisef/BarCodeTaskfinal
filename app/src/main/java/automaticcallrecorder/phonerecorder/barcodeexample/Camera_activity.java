@@ -77,7 +77,7 @@ public class Camera_activity extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Camera_activity.this, MainActivity.class));
+              finish();
             }
         });
 

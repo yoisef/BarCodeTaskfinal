@@ -31,6 +31,7 @@ import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.SurfaceHolder;
@@ -40,6 +41,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,7 +75,7 @@ import static android.support.v7.widget.helper.ItemTouchHelper.Callback.getDefau
 
 public class MainActivity extends AppCompatActivity implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
 
-    TextView txtView;
+    TextView txtView, paybutton;
     ImageView myImageView;
     BarcodeDetector detector;
     Bitmap myBitmap;
@@ -83,14 +85,17 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
     ImageView scan, barcodimg;
     Toolbar mytoolbar;
     Button enterbarcode;
-    android.app.AlertDialog.Builder builder;
-    android.app.AlertDialog alertDialog;
+    android.app.AlertDialog.Builder builder,builder1;
+    android.app.AlertDialog alertDialog,alertDialog1;
     Call<Rootmodel> mcall;
     Recycleadapter mAdapter;
     List<Product> dbList;
     FirebaseDatabase database;
     DatabaseReference myRef;
     productmodel mymodel;
+    TextView pricetotal;
+    LinearLayout paylinear;
+    int total;
 
 
     @Override
@@ -103,8 +108,35 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
 
 
         // Write a message to the database
+        pricetotal=findViewById(R.id.totalprice);
+        paylinear=findViewById(R.id.paylayout);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("products");
+
+        paybutton=findViewById(R.id.paybut);
+        paylinear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                builder1 = new android.app.AlertDialog.Builder(MainActivity.this);
+
+
+                View view = LayoutInflater.from(MainActivity.this.getApplicationContext()).inflate(R.layout.payayout, null);
+             TextView transtext=view.findViewById(R.id.transfer);
+                builder1.setView(view);
+                alertDialog1= builder1.create();
+                alertDialog1.show();
+                transtext.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog1.cancel();
+                        Toast toast=Toast.makeText(MainActivity.this,"Verifiying$Transfering the cart item... ",Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.TOP|Gravity.CENTER,0,20);
+                        toast.show();
+                    }
+                });
+
+            }
+        });
 
 
 
@@ -254,7 +286,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
     @Override
     protected void onPause() {
         super.onPause();
-        overridePendingTransition(R.anim.uptocenter, R.anim.centertodown);
+        overridePendingTransition(R.anim.uptocenter,R.anim.centertodown);
 
     }
 
