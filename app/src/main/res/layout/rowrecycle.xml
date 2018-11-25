@@ -96,7 +96,7 @@
         </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
-            android:id="@+id/productprice"
+            android:id="@+id/itempricee"
             android:layout_centerVertical="true"
             android:textColor="@color/black"
             android:textSize="20sp"

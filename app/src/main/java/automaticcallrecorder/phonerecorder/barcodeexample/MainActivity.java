@@ -51,13 +51,19 @@ import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import automaticcallrecorder.phonerecorder.barcodeexample.Models.Product;
 import automaticcallrecorder.phonerecorder.barcodeexample.Models.Rootmodel;
@@ -95,7 +101,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
     productmodel mymodel;
     TextView pricetotal;
     LinearLayout paylinear;
-    int total;
+    long total;
+    List<String> allprices;
 
 
     @Override
@@ -106,12 +113,59 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
 
         requestPermission();
 
-
         // Write a message to the database
         pricetotal=findViewById(R.id.totalprice);
         paylinear=findViewById(R.id.paylayout);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("products");
+        myRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+               productmodel mypro= dataSnapshot.getValue(productmodel.class);
+              String pricerow= mypro.getPriceproduct();
+              if (pricerow!=null)
+              {
+                  total=total+Long.parseLong(pricerow);
+                  pricetotal.setText(String.valueOf(total));
+              }
+              else{
+                  myRef.addValueEventListener(new ValueEventListener() {
+                      @Override
+                      public void onDataChange(DataSnapshot dataSnapshot) {
+                          long u =dataSnapshot.getChildrenCount();
+                          long virtualtotal=u*2;
+                          pricetotal.setText(String.valueOf(virtualtotal));
+                      }
+
+                      @Override
+                      public void onCancelled(DatabaseError databaseError) {
+
+                      }
+                  });
+
+              }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         paybutton=findViewById(R.id.paybut);
         paylinear.setOnClickListener(new View.OnClickListener() {
@@ -143,7 +197,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
         mAdapter = new Recycleadapter(this);
 
 
-        mytoolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        mytoolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(mytoolbar);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -154,15 +209,16 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
         getSupportActionBar().setCustomView(R.layout.cutom_action_bar);
         View view = getSupportActionBar().getCustomView();
 
-        enterbarcode = (Button) findViewById(R.id.barcodenumber);
-        myrecycle = (RecyclerView) findViewById(R.id.productrecycle);
+        enterbarcode =  findViewById(R.id.barcodenumber);
+        myrecycle =  findViewById(R.id.productrecycle);
         myrecycle.setHasFixedSize(true);
         myrecycle.setLayoutManager(new LinearLayoutManager(this));
         myrecycle.setItemAnimator(new DefaultItemAnimator());
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(myrecycle);
         myrecycle.setAdapter(mAdapter);
-        //add remove when swipe from recycle
+
+
 
 
         scan = view.findViewById(R.id.camerascan);
@@ -229,11 +285,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
 
                                 if (response.isSuccessful()) {
                                     Product newproduct = response.body().getProducts().get(0);
-                                    mymodel = new productmodel(newproduct.getProductName(), newproduct.getBarcodeNumber(), newproduct.getDescription(), newproduct.getImages().get(0), newproduct.getColor(), newproduct.getCategory());
+                                    mymodel = new productmodel(newproduct.getProductName(), newproduct.getBarcodeNumber(), newproduct.getDescription(), newproduct.getImages().get(0), newproduct.getColor(), newproduct.getCategory(),newproduct.getStores().get(0).getStorePrice());
                                     myRef.push().setValue(mymodel);
 
                                 } else {
-                                    mymodel = new productmodel(null, myedit.getText().toString(), null, null, null, null);
+                                    mymodel = new productmodel(null, myedit.getText().toString(), null, null, null, null,null);
                                     myRef.push().setValue(mymodel);
 
 
@@ -244,7 +300,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
 
                             @Override
                             public void onFailure(Call<Rootmodel> call, Throwable t) {
-                                mymodel = new productmodel(null, myedit.getText().toString(), null, null, null, null);
+                                mymodel = new productmodel(null, myedit.getText().toString(), null, null, null, null,null);
                                 myRef.push().setValue(mymodel);
 
 
@@ -266,18 +322,13 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
             }
         });
 
-        cameraView = (SurfaceView) findViewById(R.id.camera_view);
 
 
-
-
-
-        }
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
-
 
         overridePendingTransition(R.anim.downtocenter, R.anim.centertoup);
     }
@@ -370,11 +421,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
 
                             if (response.isSuccessful()) {
                                 Product newproduct = response.body().getProducts().get(0);
-                                mymodel = new productmodel(newproduct.getProductName(), newproduct.getBarcodeNumber(), newproduct.getDescription(), newproduct.getImages().get(0), newproduct.getColor(), newproduct.getCategory());
+                                mymodel = new productmodel(newproduct.getProductName(), newproduct.getBarcodeNumber(), newproduct.getDescription(), newproduct.getImages().get(0), newproduct.getColor(), newproduct.getCategory(),newproduct.getStores().get(0).getStorePrice());
                                 myRef.push().setValue(mymodel);
 
                             } else {
-                                mymodel = new productmodel(null, barcodedata, null, null, null, null);
+                                mymodel = new productmodel(null, barcodedata, null, null, null, null,null);
                                 myRef.push().setValue(mymodel);
 
                             }
@@ -385,7 +436,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
                         @Override
                         public void onFailure(Call<Rootmodel> call, Throwable t) {
 
-                            mymodel = new productmodel(null, barcodedata, null, null, null, null);
+                            mymodel = new productmodel(null, barcodedata, null, null, null, null,null);
                             myRef.push().setValue(mymodel);
 
 
@@ -426,9 +477,14 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
 
 
             }
+
+
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+
+
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
@@ -436,18 +492,16 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
 
         if (viewHolder instanceof Recycleadapter.viewholder) {
             // get the removed item name to display it in snack bar
+
             List<String> myres=mAdapter.getKeys();
             myRef.child(myres.get(position)).removeValue();
             mAdapter.removeItem(position);
 
 
-
-
-
-
-
             }
         }
+
+
 
 
     }

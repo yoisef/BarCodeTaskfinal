@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.agilie.swipe2delete.SwipeToDeleteDelegate;
 import com.agilie.swipe2delete.interfaces.ISwipeToDeleteAdapter;
@@ -26,14 +27,16 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+import java.util.HashSet;
 import java.util.List;
-
-
+import java.util.Set;
 
 
 public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewholder> {
 
     Context con;
+
+
 
     List<productmodel> mylist;
     DatabaseReference reference= FirebaseDatabase.getInstance().getReference("products");
@@ -42,7 +45,7 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
 
 
 
-    ArrayList<Integer> prices;
+    List<String> prices;
 
 
 
@@ -64,6 +67,8 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 productmodel model=dataSnapshot.getValue(productmodel.class);
                 String key=dataSnapshot.getKey();
+             String price=model.getPriceproduct();
+             prices.add(price);
                 keys.add(key);
                 mylist.add(model);
                 notifyDataSetChanged();
@@ -90,6 +95,9 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
             }
         });
 
+
+
+
     }
 
 
@@ -104,6 +112,8 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
     @Override
     public void onBindViewHolder(@NonNull final viewholder holder,  int position) {
 
+
+       int i=Integer.parseInt(holder.pricee.getText().toString()) ;
 
 
         holder.rowrecycle.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +139,7 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
 
 
         if (mylist.get(position).namemyproduct != null) {
-            holder.namee.setText(mylist.get(position).namemyproduct);
+            holder.namee.setText(mylist.get(position).getNamemyproduct());
         }
         else
         {
@@ -138,7 +148,7 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
         if (mylist.get(position).imgmyproduct!=null)
         {
             Glide.with(con)
-                    .load(mylist.get(position).imgmyproduct)
+                    .load(mylist.get(position).getImgmyproduct())
                     .into(holder.productimage);
         }
         else {
@@ -152,8 +162,11 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
 
     @Override
     public int getItemCount() {
+
+
         return mylist.size();
     }
+
 
 
 
@@ -169,7 +182,7 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
 
             namee=itemView.findViewById(R.id.nameproduct);
             numberr=itemView.findViewById(R.id.numberproduct);
-            pricee=itemView.findViewById(R.id.productprice);
+            pricee=itemView.findViewById(R.id.itempricee);
             productimage=itemView.findViewById(R.id.productimg);
             removeimg=itemView.findViewById(R.id.remove);
             rowrecycle=itemView.findViewById(R.id.myrow);
@@ -181,8 +194,10 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
 
 
 
-
-    public ArrayList<Integer> getPrices() {
+    public List<productmodel> getMylist() {
+        return mylist;
+    }
+    public List<String> getPrices() {
         return prices;
     }
 
