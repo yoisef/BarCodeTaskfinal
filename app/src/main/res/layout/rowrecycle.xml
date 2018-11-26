@@ -12,12 +12,12 @@
         android:background="@color/blood"
         android:layout_height="100dp">
         <ImageView
-            android:layout_width="40dp"
+            android:layout_width="30dp"
             android:id="@+id/xsign"
             android:src="@drawable/xsign"
             android:layout_margin="5dp"
             android:layout_centerVertical="true"
-            android:layout_height="40dp" />
+            android:layout_height="30dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_margin="5dp"

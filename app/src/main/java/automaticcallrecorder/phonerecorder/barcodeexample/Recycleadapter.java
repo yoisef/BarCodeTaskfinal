@@ -139,6 +139,8 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
 
                     }
                 });
+                Animation animation=AnimationUtils.loadAnimation(con,R.anim.notify);
+                holder.xremove.startAnimation(animation);
 
             }
 
@@ -220,7 +222,7 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
     class viewholder extends RecyclerView.ViewHolder{
 
         TextView namee , numberr , pricee ,deleterowww;
-        ImageView productimage,removeimg;
+        ImageView productimage,removeimg,xremove;
         RelativeLayout removerow,productdetailss;
         SwipeLayout rowrecycle;
 
@@ -237,6 +239,7 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
             productdetailss=itemView.findViewById(R.id.productdetails);
             removerow=itemView.findViewById(R.id.background);
             deleterowww=itemView.findViewById(R.id.deleterow);
+            xremove=itemView.findViewById(R.id.xsign);
 
 
         }

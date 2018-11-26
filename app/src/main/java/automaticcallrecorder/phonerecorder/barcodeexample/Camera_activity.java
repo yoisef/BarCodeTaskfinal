@@ -96,6 +96,7 @@ public class Camera_activity extends AppCompatActivity {
         cameraSource = new CameraSource
                 .Builder(this, detector)
                 .setRequestedPreviewSize(640, 480)
+                .setAutoFocusEnabled(true)
                 .build();
 
         cameraView.getHolder().addCallback(new SurfaceHolder.Callback() {
