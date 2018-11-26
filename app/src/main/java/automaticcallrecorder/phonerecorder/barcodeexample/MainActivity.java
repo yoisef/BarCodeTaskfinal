@@ -79,7 +79,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static android.media.MediaRecorder.VideoSource.CAMERA;
 import static android.support.v7.widget.helper.ItemTouchHelper.Callback.getDefaultUIUtil;
 
-public class MainActivity extends AppCompatActivity implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
+public class MainActivity extends AppCompatActivity {
 
     TextView txtView, paybutton;
     ImageView myImageView;
@@ -214,8 +214,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
         myrecycle.setHasFixedSize(true);
         myrecycle.setLayoutManager(new LinearLayoutManager(this));
         myrecycle.setItemAnimator(new DefaultItemAnimator());
-        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
-        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(myrecycle);
+
         myrecycle.setAdapter(mAdapter);
 
 
@@ -486,20 +485,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemTouch
 
 
 
-    @Override
-    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
 
-
-        if (viewHolder instanceof Recycleadapter.viewholder) {
-            // get the removed item name to display it in snack bar
-
-            List<String> myres=mAdapter.getKeys();
-            myRef.child(myres.get(position)).removeValue();
-            mAdapter.removeItem(position);
-
-
-            }
-        }
 
 
 

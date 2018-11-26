@@ -8,8 +8,12 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,6 +22,7 @@ import android.widget.Toast;
 import com.agilie.swipe2delete.SwipeToDeleteDelegate;
 import com.agilie.swipe2delete.interfaces.ISwipeToDeleteAdapter;
 import com.bumptech.glide.Glide;
+import com.daimajia.swipe.SwipeLayout;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -67,8 +72,8 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 productmodel model=dataSnapshot.getValue(productmodel.class);
                 String key=dataSnapshot.getKey();
-             String price=model.getPriceproduct();
-             prices.add(price);
+                String price=model.getPriceproduct();
+                prices.add(price);
                 keys.add(key);
                 mylist.add(model);
                 notifyDataSetChanged();
@@ -112,11 +117,56 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
     @Override
     public void onBindViewHolder(@NonNull final viewholder holder,  int position) {
 
+        holder.rowrecycle.setShowMode(SwipeLayout.ShowMode.LayDown);
+        holder.rowrecycle.addSwipeListener(new SwipeLayout.SwipeListener() {
+            @Override
+            public void onStartOpen(SwipeLayout layout) {
 
-       int i=Integer.parseInt(holder.pricee.getText().toString()) ;
 
 
-        holder.rowrecycle.setOnClickListener(new View.OnClickListener() {
+            }
+
+            @Override
+            public void onOpen(SwipeLayout layout) {
+
+                holder.deleterowww.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int i=holder.getAdapterPosition();
+                        reference.child(keys.get(i)).removeValue();
+                        mylist.remove(i);
+                        notifyItemRemoved(i);
+
+                    }
+                });
+
+            }
+
+            @Override
+            public void onStartClose(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onClose(final SwipeLayout layout) {
+
+
+
+            }
+
+            @Override
+            public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
+
+            }
+
+            @Override
+            public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
+
+            }
+        });
+
+
+        holder.productdetailss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 con.startActivity(new Intent(con , Productdetails.class));
@@ -124,16 +174,13 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
 
             }
         });
-        holder.deleterowww.setOnClickListener(new View.OnClickListener() {
+        holder.removeimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int i=holder.getAdapterPosition();
-                reference.child(keys.get(i)).removeValue();
-                mylist.remove(i);
-                notifyItemRemoved(i);
-
+                holder.rowrecycle.open();
             }
         });
+
 
         holder.numberr.setText(mylist.get(position).numbermyproduct);
 
@@ -174,7 +221,8 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
 
         TextView namee , numberr , pricee ,deleterowww;
         ImageView productimage,removeimg;
-        RelativeLayout rowrecycle,removerow;
+        RelativeLayout removerow,productdetailss;
+        SwipeLayout rowrecycle;
 
 
         public viewholder(View itemView) {
@@ -186,8 +234,10 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
             productimage=itemView.findViewById(R.id.productimg);
             removeimg=itemView.findViewById(R.id.remove);
             rowrecycle=itemView.findViewById(R.id.myrow);
+            productdetailss=itemView.findViewById(R.id.productdetails);
             removerow=itemView.findViewById(R.id.background);
             deleterowww=itemView.findViewById(R.id.deleterow);
+
 
         }
     }
