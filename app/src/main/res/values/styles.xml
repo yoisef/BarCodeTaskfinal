@@ -12,6 +12,7 @@
 
         <item name="contentInsetStart">0dp</item>
         <item name="contentInsetEnd">0dp</item>
+        <item name="colorAccent">@color/black</item>
     </style>
 
 

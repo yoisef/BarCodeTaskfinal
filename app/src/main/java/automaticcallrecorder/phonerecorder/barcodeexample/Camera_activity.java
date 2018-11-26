@@ -42,18 +42,17 @@ import java.io.IOException;
 import java.security.AllPermission;
 
 public class Camera_activity extends AppCompatActivity {
+    private BarcodeDetector detector;
+    private TextView resultscan;
 
-    BarcodeDetector detector;
-    TextView resultscan;
-
-    SurfaceView cameraView;
-    CameraSource cameraSource;
-    android.app.AlertDialog.Builder builder;
-    android.app.AlertDialog alertDialog;
-    Button cancel;
-    FrameLayout myframe;
-    MediaPlayer ring;
-    android.hardware.Camera c;
+    private SurfaceView cameraView;
+    private CameraSource cameraSource;
+    private android.app.AlertDialog.Builder builder;
+    private  android.app.AlertDialog alertDialog;
+    private  Button cancel;
+    private  FrameLayout myframe;
+    private  MediaPlayer ring;
+    private android.hardware.Camera c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +68,6 @@ public class Camera_activity extends AppCompatActivity {
         cancel = (Button) findViewById(R.id.backtomain);
         myframe= (FrameLayout) findViewById(R.id.myframecamera);
 
-        //set camera to continually auto-focus
-
-        
 
         cameraView.getHolder().setFormat(PixelFormat.TRANSLUCENT);
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +128,7 @@ public class Camera_activity extends AppCompatActivity {
         });
 
 
-
+      //set the event will done when detecte barcode by camera which must return barcode value to main azctivity
         detector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
             public void release() {

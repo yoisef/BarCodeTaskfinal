@@ -81,28 +81,23 @@ import static android.support.v7.widget.helper.ItemTouchHelper.Callback.getDefau
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView txtView, paybutton;
-    ImageView myImageView;
-    BarcodeDetector detector;
-    Bitmap myBitmap;
-    SurfaceView cameraView;
-    CameraSource cameraSource;
-    RecyclerView myrecycle;
-    ImageView scan, barcodimg;
-    Toolbar mytoolbar;
-    Button enterbarcode;
-    android.app.AlertDialog.Builder builder,builder1;
-    android.app.AlertDialog alertDialog,alertDialog1;
-    Call<Rootmodel> mcall;
-    Recycleadapter mAdapter;
-    List<Product> dbList;
-    FirebaseDatabase database;
-    DatabaseReference myRef;
-    productmodel mymodel;
-    TextView pricetotal;
-    LinearLayout paylinear;
-    long total;
-    List<String> allprices;
+
+   private RecyclerView myrecycle;
+    private ImageView scan, barcodimg;
+   private Toolbar mytoolbar;
+    private Button enterbarcode;
+   private android.app.AlertDialog.Builder builder,builder1;
+    private android.app.AlertDialog alertDialog,alertDialog1;
+    private Call<Rootmodel> mcall;
+    private Recycleadapter mAdapter;
+    private List<Product> dbList;
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
+    private productmodel mymodel;
+    private TextView pricetotal;
+    private LinearLayout paylinear;
+    private long total;
+    private List<String> allprices;
 
 
     @Override
@@ -111,11 +106,60 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         dbList = new ArrayList<>();
 
+        // request camera permission
         requestPermission();
 
-        // Write a message to the database
+        // intilize Ui objects
         pricetotal=findViewById(R.id.totalprice);
         paylinear=findViewById(R.id.paylayout);
+        enterbarcode =  findViewById(R.id.barcodenumber);
+        myrecycle =  findViewById(R.id.productrecycle);
+        myrecycle.setHasFixedSize(true);
+        myrecycle.setLayoutManager(new LinearLayoutManager(this));
+        myrecycle.setItemAnimator(new DefaultItemAnimator());
+        mAdapter = new Recycleadapter(this);
+        myrecycle.setAdapter(mAdapter);
+
+
+        //set Toolbar with 2 button scancamera and about us
+
+        mytoolbar =  findViewById(R.id.toolbar);
+        setSupportActionBar(mytoolbar);
+
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        getSupportActionBar().setCustomView(R.layout.cutom_action_bar);
+        View view = getSupportActionBar().getCustomView();
+
+
+
+
+
+
+        scan = view.findViewById(R.id.camerascan);
+        barcodimg = view.findViewById(R.id.aboutus);
+
+        barcodimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Aboutactivity.class));
+            }
+        });
+
+
+        scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(MainActivity.this, Camera_activity.class);
+                startActivityForResult(intent1, 0);
+
+            }
+        });
+
+        //get Firebase Database for total price
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("products");
         myRef.addChildEventListener(new ChildEventListener() {
@@ -167,7 +211,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        paybutton=findViewById(R.id.paybut);
+        //initialize pay button
+
         paylinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -184,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         alertDialog1.cancel();
                         Toast toast=Toast.makeText(MainActivity.this,"Verifiying$Transfering the cart item... ",Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.TOP|Gravity.CENTER,0,20);
+                        toast.setGravity(Gravity.TOP|Gravity.CENTER,0,50);
                         toast.show();
                     }
                 });
@@ -194,51 +239,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        mAdapter = new Recycleadapter(this);
 
 
-
-        mytoolbar =  findViewById(R.id.toolbar);
-        setSupportActionBar(mytoolbar);
-
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setDisplayShowHomeEnabled(false);
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        getSupportActionBar().setCustomView(R.layout.cutom_action_bar);
-        View view = getSupportActionBar().getCustomView();
-
-        enterbarcode =  findViewById(R.id.barcodenumber);
-        myrecycle =  findViewById(R.id.productrecycle);
-        myrecycle.setHasFixedSize(true);
-        myrecycle.setLayoutManager(new LinearLayoutManager(this));
-        myrecycle.setItemAnimator(new DefaultItemAnimator());
-
-        myrecycle.setAdapter(mAdapter);
-
-
-
-
-        scan = view.findViewById(R.id.camerascan);
-        barcodimg = view.findViewById(R.id.aboutus);
-
-        barcodimg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Aboutactivity.class));
-            }
-        });
-
-
-        scan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent1 = new Intent(MainActivity.this, Camera_activity.class);
-                startActivityForResult(intent1, 0);
-
-            }
-        });
+      //initialize Enterbarcode Button insted scan with camera
 
         enterbarcode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -261,6 +264,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
+                        //when user press ok call request to api by barcode number to get info about barcode and display it
+
                         OkHttpClient.Builder builderr = new OkHttpClient.Builder();
 
                         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
@@ -281,6 +286,8 @@ public class MainActivity extends AppCompatActivity {
                         mcall.enqueue(new Callback<Rootmodel>() {
                             @Override
                             public void onResponse(Call<Rootmodel> call, Response<Rootmodel> response) {
+
+                                //push details to firebase database
 
                                 if (response.isSuccessful()) {
                                     Product newproduct = response.body().getProducts().get(0);
@@ -328,6 +335,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        //animation move btw activites
 
         overridePendingTransition(R.anim.downtocenter, R.anim.centertoup);
     }
@@ -340,7 +348,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+   // request camera permission method
     private void requestPermission() {
 
         ActivityCompat.requestPermissions(this,

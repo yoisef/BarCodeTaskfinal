@@ -19,6 +19,7 @@
         android:layout_height="80dp" />
     <LinearLayout
         android:layout_width="wrap_content"
+        android:layoutDirection="ltr"
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
         android:orientation="horizontal"

@@ -39,18 +39,18 @@ import java.util.Set;
 
 public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewholder> {
 
-    Context con;
+  private   Context con;
 
 
 
-    List<productmodel> mylist;
-    DatabaseReference reference= FirebaseDatabase.getInstance().getReference("products");
-    List<String> keys;
+    private List<productmodel> mylist;
+    private DatabaseReference reference= FirebaseDatabase.getInstance().getReference("products");
+    public List<String> keys;
 
 
 
 
-    List<String> prices;
+    private List<String> prices;
 
 
 
@@ -66,6 +66,7 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
 
 
         notifyDataSetChanged();
+        // get database information to put in recycle adapter
 
         reference.addChildEventListener(new ChildEventListener() {
             @Override
