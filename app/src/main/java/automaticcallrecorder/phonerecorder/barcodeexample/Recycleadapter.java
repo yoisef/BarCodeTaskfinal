@@ -15,6 +15,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -119,7 +120,7 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
     @Override
     public void onBindViewHolder(@NonNull final viewholder holder, final int position) {
 
-        holder.rowrecycle.setShowMode(SwipeLayout.ShowMode.LayDown);
+        holder.rowrecycle.setShowMode(SwipeLayout.ShowMode.PullOut);
         holder.rowrecycle.addSwipeListener(new SwipeLayout.SwipeListener() {
             @Override
             public void onStartOpen(SwipeLayout layout) {
@@ -130,6 +131,13 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
 
             @Override
             public void onOpen(SwipeLayout layout) {
+
+                Animation animation1=AnimationUtils.loadAnimation(con,R.anim.centertoright);
+                Animation animation2=AnimationUtils.loadAnimation(con,R.anim.toleft);
+
+
+
+
 
 
                 Animation animation=AnimationUtils.loadAnimation(con,R.anim.notify);
@@ -233,7 +241,8 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
 
         TextView namee , numberr , pricee ,deleterowww;
         ImageView productimage,removeimg,xremove;
-        RelativeLayout removerow,productdetailss;
+        RelativeLayout removerow,productdetailss,backlayout;
+        LinearLayout toplayout;
         SwipeLayout rowrecycle;
 
 
@@ -247,9 +256,11 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
             removeimg=itemView.findViewById(R.id.remove);
             rowrecycle=itemView.findViewById(R.id.myrow);
             productdetailss=itemView.findViewById(R.id.productdetails);
-            removerow=itemView.findViewById(R.id.background);
             deleterowww=itemView.findViewById(R.id.deleterow);
             xremove=itemView.findViewById(R.id.xsign);
+            backlayout=itemView.findViewById(R.id.background);
+            toplayout=itemView.findViewById(R.id.foregoroundd);
+
 
 
         }
