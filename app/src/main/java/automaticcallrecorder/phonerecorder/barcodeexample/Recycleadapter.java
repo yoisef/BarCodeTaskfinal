@@ -132,13 +132,6 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
             @Override
             public void onOpen(SwipeLayout layout) {
 
-                Animation animation1=AnimationUtils.loadAnimation(con,R.anim.centertoright);
-                Animation animation2=AnimationUtils.loadAnimation(con,R.anim.toleft);
-
-
-
-
-
 
                 Animation animation=AnimationUtils.loadAnimation(con,R.anim.notify);
                 holder.xremove.startAnimation(animation);
