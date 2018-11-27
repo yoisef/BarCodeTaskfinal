@@ -88,6 +88,7 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
 
+
             }
 
             @Override
@@ -116,7 +117,7 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final viewholder holder,  int position) {
+    public void onBindViewHolder(@NonNull final viewholder holder, final int position) {
 
         holder.rowrecycle.setShowMode(SwipeLayout.ShowMode.LayDown);
         holder.rowrecycle.addSwipeListener(new SwipeLayout.SwipeListener() {
@@ -130,18 +131,22 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
             @Override
             public void onOpen(SwipeLayout layout) {
 
+
+                Animation animation=AnimationUtils.loadAnimation(con,R.anim.notify);
+                holder.xremove.startAnimation(animation);
                 holder.deleterowww.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        int i=holder.getAdapterPosition();
-                        reference.child(keys.get(i)).removeValue();
-                        mylist.remove(i);
-                        notifyItemRemoved(i);
+
+                        reference.child(keys.get(position)).removeValue();
+                        keys.remove(position);
+                        notifyItemRemoved(position);
+                        mylist.remove(position);
+                        notifyItemRemoved(position);
+
 
                     }
                 });
-                Animation animation=AnimationUtils.loadAnimation(con,R.anim.notify);
-                holder.xremove.startAnimation(animation);
 
             }
 
@@ -160,6 +165,8 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
             @Override
             public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
 
+
+
             }
 
             @Override
@@ -167,6 +174,8 @@ public class Recycleadapter extends RecyclerView.Adapter<Recycleadapter.viewhold
 
             }
         });
+
+
 
 
         holder.productdetailss.setOnClickListener(new View.OnClickListener() {

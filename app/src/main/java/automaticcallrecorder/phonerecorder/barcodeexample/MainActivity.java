@@ -159,57 +159,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //get Firebase Database for total price
-        database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("products");
-        myRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-               productmodel mypro= dataSnapshot.getValue(productmodel.class);
-              String pricerow= mypro.getPriceproduct();
-              if (pricerow!=null)
-              {
-                  total=total+Long.parseLong(pricerow);
-                  pricetotal.setText(String.valueOf(total));
-              }
-              else{
-                  myRef.addValueEventListener(new ValueEventListener() {
-                      @Override
-                      public void onDataChange(DataSnapshot dataSnapshot) {
-                          long u =dataSnapshot.getChildrenCount();
-                          long virtualtotal=u*2;
-                          pricetotal.setText(String.valueOf(virtualtotal));
-                      }
 
-                      @Override
-                      public void onCancelled(DatabaseError databaseError) {
-
-                      }
-                  });
-
-              }
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
         //initialize pay button
 
@@ -335,6 +285,60 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        //get Firebase Database for total price
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("products");
+        myRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                productmodel mypro= dataSnapshot.getValue(productmodel.class);
+                String pricerow= mypro.getPriceproduct();
+                if (pricerow!=null)
+                {
+                    total=total+Long.parseLong(pricerow);
+                    pricetotal.setText(String.valueOf(total));
+                }
+                else{
+                    myRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            long u =dataSnapshot.getChildrenCount();
+                            long virtualtotal=u*2;
+                            pricetotal.setText(String.valueOf(virtualtotal));
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
         //animation move btw activites
 
         overridePendingTransition(R.anim.downtocenter, R.anim.centertoup);
